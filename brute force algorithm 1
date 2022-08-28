@@ -1,0 +1,65 @@
+2022.08.29
+
+
+브루트 포스 알고리즘
+  brute: 무식한, force: 힘
+  완전탐색 알고리즘. 즉, 가능한 모든 경우의 수를 모두 탐색하면서 요구조건에 충족되는 결과만을 가져온다.
+  이 알고리즘의 강력한 점은 예외 없이 100%의 확률로 정답만을 출력한다.
+
+
+2798번 블랙잭
+
+https://www.acmicpc.net/problem/2798
+
+C언어
+
+#include <stdio.h>
+int main() {
+    int N, M, sum, max = 0;
+    int num[100] = { 0 };
+    
+    scanf("%d %d", &N, &M);
+
+    for (int i = 0; i < N; i++) {
+        scanf("%d", &num[i]);
+    }
+    for (int i = 0; i < N; i++) 
+        for (int j = i + 1; j < N; j++) 
+            for (int k = j + 1; k < N; k++) {
+                sum = num[i] + num[j] + num[k];
+
+                if (sum <= M && sum > max) max = sum;
+            }
+    printf("%d", max);
+    
+    return 0;
+}
+
+C++
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int N, M, sum, max = 0;
+    vector<int>num(100);
+
+    cin >> N >> M;
+
+    for (int i = 0; i < N; i++) {
+        cin >> num[i];
+    }
+    for (int i = 0; i < N; i++) 
+        for (int j = i + 1; j < N; j++) 
+            for (int k = j + 1; k < N; k++) {
+                sum = num[i] + num[j] + num[k];
+
+                if (sum <= M && sum > max) max = sum;
+            }
+    cout << max;
+
+    return 0;
+}
