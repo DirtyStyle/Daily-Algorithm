@@ -1,0 +1,121 @@
+2022 08 29
+
+선형 탐색의 경우 시간복잡도가 O(N)이지만 이진탐색의 경우에는 O(logN)이기 때문에 선형 탐색보다 더욱 빠르게 자료를 찾아낼 수 있다.
+
+https://www.acmicpc.net/problem/1920
+
+C언어
+
+#include <stdio.h>
+#include <stdlib.h>
+int compare(const void* a, const void* b){
+	int num1 = *(int*)a;    
+	int num2 = *(int*)b;    
+
+	if (num1 < num2) return -1;      
+
+	if (num1 > num2) return 1;       
+
+	return 0;    
+}
+int BinarySearch(int *a, int key, int n) {
+	int low, mid, high;
+
+	low = 0;
+	high = n - 1;
+
+	while (1) {
+		mid = (high + low) / 2;
+
+		if (a[mid] == key) return 1;
+		if (a[low] == key) return 1;
+		if (a[high] == key)  return 1;
+
+		if (a[mid] < key) low = mid + 1;
+		else high = mid - 1;
+    
+		if (high <= low) return 0;
+	}
+}
+int main() {
+	int n, m;
+	int a[100000] = { 0 };
+	int arr[100000] = { 0 };
+	
+	scanf("%d", &n);
+	
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &a[i]);
+	}
+	qsort(a, n, sizeof(int), compare);
+
+	scanf("%d", &m);
+
+	for (int i = 0; i < m; i++) {
+		scanf("%d", &arr[i]);
+		arr[i] = BinarySearch(a, arr[i], n);
+	}
+	for (int i = 0; i < m; i++) {
+		printf("%d\n", arr[i]);
+	}
+	return 0;
+}
+
+C++
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int BinarySearch(vector<int> &a, int key, int n) {
+	int low, mid, high;
+
+	low = 0;
+	high = n - 1;
+
+	while (1) {
+		mid = (high + low) / 2;
+
+		if (a[mid] == key) return 1;
+		if (a[low] == key) return 1;
+		if (a[high] == key)  return 1;
+
+		if (a[mid] < key) low = mid + 1;
+		else high = mid - 1;
+		
+		if (high <= low) return 0;
+	}
+}
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);                       // cin cout 빠르게 하는 방법이나 실무에선 사용 x
+	cout.tie(NULL);                      // 문제풀이 시간초과용
+
+	int n, m, v;
+	
+	vector<int>a;
+	vector<int>arr;
+
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		cin >> v;
+		a.push_back(v);
+	}
+
+	sort(a.begin(), a.end());
+
+	cin >> m;
+
+	for (int i = 0; i < m; i++) {
+		cin >> v;
+		arr.push_back(v);
+		arr[i] = BinarySearch(a, arr[i], n);
+	}
+	for (int i = 0; i < m; i++) {
+		cout << arr[i] << "\n";
+	}
+	return 0;
+}
