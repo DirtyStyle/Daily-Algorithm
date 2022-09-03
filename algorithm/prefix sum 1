@@ -1,0 +1,91 @@
+누적 합 (Prefix Sum)
+
+크기가 N인 정수 배열 A와 구간 l, r (l <＝ｒ) 이 주어지고 A[l] + A[l+1] + ㆍㆍㆍ + A[r-1] + A[r]의 값을 
+구하는 것을 최대 M번 수행해야 할 때 배열 A에 들어있는 값이 바뀌지 않는다는 점을 이용한 알고리즘이다.
+
+누적 합을 사용하지 않을 경우 시간복잡도 O(N^2)
+누적 합을 사용할 경우 시간복잡도 O(N)
+
+
+S[i] = A[1] + ㆍㆍㆍ + A[i], S[0] = 0일 때
+S[r] = A[1] + ㆍㆍㆍ + A[r]
+S[l-1] = A[1] + ㆍㆍㆍ + A[l-1]
+S[r] - S[l-1] = A[l] + ㆍㆍㆍ + A[r]이 된다. 따라서 l번째 수부터 r번째 수까지 합은 S[r] - S[l-1]과 같다.
+
+A[11] = { 0,1,2,3,4,5,6,7,8,9,10 } 1 ~ 10을 넣은 A배열 선언
+S[11] = { 0 } 누적된 합을 구하는 배열 선언
+
+i = 0일 때
+ S[0] = 0, A[0] = 0
+i = 1일 때
+ S[1] = S[0] + A[1] = 1, A[1] = 1
+i = 2일 때
+ S[2] = S[1] + A[2] = 3, A[2] = 2
+i = 3일 때
+ S[3] = S[2] + A[3] = 6, A[3] = 3
+i = 4일 때
+ S[4] = S[3] + A[4] = 10, A[4] = 4
+i = 5일 때
+ S[5] = S[4] + A[5] = 15, A[5] = 5
+i = 6일 때
+ S[6] = S[5] + A[6] = 21, A[6] = 6
+i = 7일 때
+ S[7] = S[6] + A[7] = 28, A[7] = 7
+i = 8일 때
+ S[8] = S[7] + A[8] = 36, A[8] = 8
+i = 7일 때
+ S[9] = S[8] + A[9] = 45, A[9] = 9
+i = 8일 때
+ S[10] = S[9] + A[10] = 55, A[10] = 10
+
+l = 3이고 r = 8이면
+S[8] - S[3 – 1] = 33
+3 + 4 + 5 + 6 + 7 + 8 = 33
+즉 S[i]를 한 번이라도 구하면 원할 때마다 원하는 구간의 합을 가질 수 있다. 누적 합을 이용한 BOJ 문제
+
+11659번 구간 합 구하기 4 : https://www.acmicpc.net/problem/11659
+
+C++
+
+
+2559번 수열 : https://www.acmicpc.net/problem/2559
+16139번 인간-컴퓨터 상호작용 : https://www.acmicpc.net/problem/16139
+
+위의 표를 구하는 반복문
+for (int i = 1; I <= n; i++) {
+ s[i] = s[i – 1] + a[i];
+}
+
+11659번 구간 합 구하기 4 : https://www.acmicpc.net/problem/11659
+
+C++
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int n, m;
+    
+    cin >> n >> m;
+    
+    vector<int> a(n+1);
+    vector<int> s(n+1);
+    
+    for (int i=1; i<=n; i++) {
+        cin >> a[i];
+        
+        s[i] = s[i-1] + a[i];
+    }
+    while (m--) {
+        int x, y;
+        
+        cin >> x >> y;
+        cout << s[y] - s[x-1] << '\n';
+    }
+    return 0;
+}
