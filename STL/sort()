@@ -1,0 +1,140 @@
+2022 09 04
+
+C++ STL std::sort()에 대해서
+
+std::sort() 함수는 C++ STL에서 제공하는 함수로써 정렬에 이용되며 <algorithm> 헤더를 include 하여 사용 할 수 있다. 
+
+최악의 경우 O(N^2) 의 시간복잡도를 가지는 quick sort와는 달리 std::sort()는 최악의 경우에도 O(NlogN) 이다.
+
+
+사용 방법
+std::sort(배열 시작, 배열 끝, (선택)사용자 지정 함수(compare));
+				→bool형 함수 또는 수식을 넣어줄 수 있다.
+				→3번째 자리의 이름이 compare이라고 정해진 것은 아니다.
+
+사용자 지정 함수를 생략할 경우 default인 오름차순으로 정렬한다.
+사용자 지정 함수 자리에 ‘greater<자료형>()’ 을 넣어주면 내림차순으로 정렬한다.
+
+예시)
+#include <algorithm>   // <algorithm>헤더를 include
+
+int main(){
+int a[10] = { 0,1,3,4,2,8,7,5,6 };   // 10칸짜리 a배열 생성
+			   →예시를 배열로 들었지만 vector나 pair같은 배열처럼 쓰일 수 있는 것들은 다 가능하다.
+
+std::sort(a, a + 10);   // begin <= 범위 <end 이기 때문에 a + 10을 해주어야 함
+}
+
+구조체를 사용할 경우 bool형 함수를 만들어 주어야 한다.
+    →구조체만 그런 건 아니고 정렬을 할 때 특수한 조건이 붙는 경우 만들어 주어야 한다.
+
+예시)
+struct st{		   // st형 구조체 선언
+	int start;
+	int end;
+};
+bool compare(const st& p1, const st& p2) {
+	if (p1.start < p2.start) {		// p2.start가 더 클 경우 true를 리턴
+		return true;		// 내림차순은 if(p1.start > p2.start) {}
+	}
+	else if (p1.start == p2.start) {
+		return p1.end < p2.end;    // p1.start와 p2.start가 같을 경우 end를 비교 후 리턴
+	}			         // 내림차순은 return p1.end > p2.end;
+	else {
+		return false;		// 위쪽 조건이 모두 아닌 경우 false를 리턴
+	}
+}
+compare 함수에서 else if를 생략하고 std::stable_sort();를 사용해도 된다. 사용방법은 std::sort와 같다.
+
+위의 else if문이나 stable_sort를 사용하는 이유는 아래 예시를 보면 알 수 있다.
+
+예시) 첫 숫자가 같은 경우 두 번째 숫자 중 더 큰 수를 뒤로 보낸다.
+
+(4, 7), (1, 3), (4, 1), (7, 3), (2, 4) 이 있다고 할 때
+
+문제대로라면 (1, 3), (2, 4), (4, 1), (4, 7), (7, 3) 이 되어야 하지만
+(1, 3), (2, 4), (4, 7), (4, 1), (7, 3) ←처럼 (4, 7)와 (4, 1)중 누가 앞으로 가는지 알 수 없다.
+
+연습하기 좋은 문제
+
+11650 좌표 정렬하기 : https://www.acmicpc.net/problem/11650
+
+C언어
+    * C언어의 경우엔 stdlib.h에 내장된 함수인 qsort();를 사용하면 편하게 정렬시킬 수 있다.
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct{
+	int x;
+	int y;
+} coo;
+int compare(const void* a, const void* b){
+    coo num1 = *(coo *)a;
+    coo num2 = *(coo *)b;
+
+    if (num1.x < num2.x) return -1;
+    if (num1.x > num2.x) return 1;
+	else if (num1.x == num2.x) {
+		if (num1.y > num2.y) return 1;
+		else return -1;
+	}
+    return 0;
+}
+int main() {
+	int n;
+	scanf("%d", &n);
+	coo arr[100000];
+
+	for (int i = 0; i < n; i++) {
+		scanf("%d %d", &arr[i].x, &arr[i].y);
+	}
+	qsort(arr, n, sizeof(coo), compare);
+
+	for (int i = 0; i < n; i++) {
+		printf("%d %d\n", arr[i].x, arr[i].y);
+	}
+	return 0;
+}
+
+C++
+
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+struct coo {
+	int x;
+	int y;
+};
+bool compare(const coo& p1, const coo& p2) {
+	if (p1.x < p2.x) {
+		return true;
+	}
+	else if (p1.x == p2.x) {
+		return p1.y < p2.y;
+	}
+	else {
+		return false;
+	}
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n; coo arr[100000];
+	
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i].x >> arr[i].y;
+	}
+	sort(arr, arr+n, compare);
+
+	for (int i = 0; i < n; i++) {
+		cout << arr[i].x << " " << arr[i].y << "\n";
+	}
+	return 0;
+}
