@@ -1,0 +1,25 @@
+2022 09 09
+
+11051번 이항 계수 2 : https://www.acmicpc.net/problem/11051
+
+#include <stdio.h>
+	int main() {
+		int arr[1001][1001] = { 1, };
+		int N, K;
+
+		scanf("%d %d", &N, &K);
+
+		for (int i = 0; i <= N; i++) {
+			for (int j = 0; j <= K; j++) {
+				if (i == j || j == 0){
+					arr[i][j] = 1;
+				}
+				else{
+					arr[i][j] = (arr[i - 1][j - 1] % 10007 + arr[i - 1][j] % 10007) % 10007;
+				}
+			}
+		}
+		printf("%d", arr[N][K]);
+
+		return 0;
+	}
