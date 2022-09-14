@@ -1,6 +1,6 @@
 2022 09 14
 
-https://www.acmicpc.net/problem/9012
+9012번 괄호 : https://www.acmicpc.net/problem/9012
 
 #include <iostream>
 #include <algorithm>
