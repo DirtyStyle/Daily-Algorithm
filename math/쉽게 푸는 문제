@@ -1,0 +1,23 @@
+2022 09 16
+
+1292번 쉽게 푸는 문제 : https://www.acmicpc.net/problem/1292
+
+#include <stdio.h>
+int main() {
+	int arr[500500] = { 0 };
+	int a, b, j, num = 0, sum = 0;
+
+	scanf("%d %d", &a, &b);
+
+	for (int i = 1; i <= 1000; i++) {
+		for (j = 0; j < i; j++) {
+			arr[num + j] = i;
+		}
+		num += j;
+	}
+	for (int i = a - 1; i < b; i++) {
+		sum += arr[i];
+	}
+	printf("%d", sum);
+	return 0;
+}
