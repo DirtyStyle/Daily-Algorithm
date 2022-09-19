@@ -1,5 +1,7 @@
 2022 09 15
 
+10733번 제로 : https://www.acmicpc.net/problem/10773
+
 #include <iostream>
 #include <algorithm>
 #include <stack>
