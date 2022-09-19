@@ -1,0 +1,89 @@
+2022 09 20
+
+10816번 숫자 카드 2 : https://www.acmicpc.net/problem/10816
+
+맨 아래엔 처음에 작성한 코드를 적어놓았다
+저 코드로는 시간초과가 나서 upper_bound를 처음 이용해 보았다.
+
+
+성공한 코드
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    ios_base :: sync_with_stdio(false); 
+    cin.tie(NULL); 
+    cout.tie(NULL);
+    
+	int n, m, i, j = 0;
+	vector<int>vn; vector<int>cnt;
+
+	cin >> n;
+
+	for (i = 0; i < n; i++) {
+		int a; cin >> a; vn.push_back(a);
+	}
+	sort(vn.begin(), vn.end());
+
+	cin >> m;
+
+	for (i = 0; i < m; i++) {
+		int a; cin >> a;
+		int b = lower_bound(vn.begin(), vn.end(), a) - vn.begin();
+		int c = upper_bound(vn.begin(), vn.end(), a) - vn.begin();
+		cout << c - b << " ";
+	}
+	return 0;
+}
+
+
+실패한 코드
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    ios_base :: sync_with_stdio(false); 
+    cin.tie(NULL); 
+    cout.tie(NULL);
+    
+	int n, m, i, j = 0;
+	vector<int>vn; vector<int>cnt;
+
+	cin >> n;
+
+	for (i = 0; i < n; i++) {
+		int a; cin >> a; vn.push_back(a);
+	}
+	sort(vn.begin(), vn.end());
+
+	cin >> m;
+
+	for (i = 0; i < m; i++) {
+		int a; cin >> a;
+		int b = lower_bound(vn.begin(), vn.end(), a) - vn.begin();
+		cnt.push_back(0);
+		if (vn[b] != a) {
+			j++;
+			continue;
+		}
+		for (int k = b; k < vn.size(); k++) {
+			if (vn[k] != vn[b]) break;
+
+			cnt[j] += 1;
+		}
+		j++;
+	}
+	for (i = 0; i < cnt.size(); i++) {
+		cout << cnt[i] << " ";
+	}
+
+	return 0;
+}
