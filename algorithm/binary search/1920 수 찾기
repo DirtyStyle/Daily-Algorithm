@@ -2,7 +2,7 @@
 
 선형 탐색의 경우 시간복잡도가 O(N)이지만 이진탐색의 경우에는 O(logN)이기 때문에 선형 탐색보다 더욱 빠르게 자료를 찾아낼 수 있다.
 
-https://www.acmicpc.net/problem/1920
+1920번 수 찾기 : https://www.acmicpc.net/problem/1920
 
 C언어
 
