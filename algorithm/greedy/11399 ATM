@@ -9,6 +9,8 @@
 
 오늘 배운것 : vector은 써야할 상황이 아니면 그냥 배열 쓰자
 
+11399번 ATM : https://www.acmicpc.net/problem/11399
+
 C언어
 
 #include <stdio.h>
