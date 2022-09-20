@@ -4,7 +4,7 @@
 
 유클리드 호제법을 공부한다면 쉽게 풀리는 문제
 
-https://www.acmicpc.net/problem/3036
+3036번 링 : https://www.acmicpc.net/problem/3036
 
 #include <iostream>
 #include <algorithm>
