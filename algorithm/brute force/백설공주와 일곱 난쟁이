@@ -1,0 +1,34 @@
+2022 09 21
+
+3040번 백설공주와 일곱 난쟁이 : https://www.acmicpc.net/problem/3040
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int arr[9] = { 0 }; int sum = 0, temp = 0, a = 0, b = 0;
+
+	for (int i = 0; i < 9; i++) {
+		cin >> arr[i];
+		sum += arr[i];
+	}
+	for (int i = 0; i < 9; i++) {
+		temp = sum;
+		temp -= arr[i];
+		for (int j = 0; j < 9; j++) {
+			if (temp - arr[j] == 100) {
+				a = i;
+				b = j;
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < 9; i++) {
+		if (i == a || i == b) continue;
+		cout << arr[i] << "\n";
+	}
+
+
+	return 0;
+}
