@@ -1,0 +1,150 @@
+쓸사람 쓰세용
+
+#
+# 5-1 절대값 계산
+#
+
+a = int(input("정수를 입력하세요 : "))
+if(a < 0):
+    b = -a
+
+print("%d 의 절대값은 %d\n" %(a,b))
+
+
+#
+# 5-2 2개의 정수 입력받아 큰 수 출력
+#
+
+a = int(input("정수 1 : "))
+b = int(input("정수 2 : "))
+if(a > b):
+    max = a
+elif(b > a):
+    max = b
+    
+print("\n\n정수 1 : %d과 정수 2 : %d 중에서 큰 값은 %d\n" %(a, b, max))    
+
+
+#
+# 5-3 양수/음수/0 판단하기 
+#
+
+a = int(input("정수 : "))
+if(a > 0):
+    print("\n정수 %d는 양수이다.\n" %(a))
+elif(a < 0):
+    print("\n정수 %d는 음수이다.\n" %(a))
+else:
+    print("\n정수 %d는 %d이다.\n" %(a, a))
+
+#
+# 5-4 3개의 정수 입력받아 가장 작은 정수 출력
+#
+
+a = int(input("정수 : "))
+b = int(input("정수 : "))
+c = int(input("정수 : "))
+
+if(a < b and a < c):
+    print("%d, %d, %d, 중에서 가장 작은 값은 %d\n" %(a,b,c,a))
+elif(b < a and b < c):
+    print("%d, %d, %d, 중에서 가장 작은 값은 %d\n" %(a,b,c,b))    
+else:
+    print("%d, %d, %d, 중에서 가장 작은 값은 %d\n" %(a,b,c,c))
+
+#
+# 5-5 x, y 좌표 값 입력받아 사분면 출력
+#
+
+x = int(input("x값 : "))
+y = int(input("y값 : "))
+
+if(x > 0):
+    if(y > 0):
+        print("\nx값 : %d, y값 : %d -> 1사분면\n" %(x,y))
+    elif(y < 0):
+        print("\nx값 : %d, y값 : %d -> 4사분면\n" %(x,y))
+elif(x < 0):
+    if(y > 0):
+        print("\nx값 : %d, y값 : %d -> 2사분면\n" %(x,y))
+    elif(y < 0):
+        print("\nx값 : %d, y값 : %d -> 3사분면\n" %(x,y))
+else:
+    print("\n사분면의 중심\n")
+
+#
+# 5-6 건조주의보 판단
+# 실효습도 35%이하가 2일 이상 계속될 때
+#
+
+humidity = int(input("습도(%) : "))
+day = int(input("지속일수 : "))
+
+if(humidity <= 35 and day >= 2):
+    print("\n습도 %d이하가 %d일 이상 -> 건조주의보 알림" %(humidity, day))
+else:
+    print("\n건조주의보 알림 없음\n")
+
+#
+# 5-7 강풍주의보 판단
+# 육상에서 풍속 (14m/s) 이상 또는 순간풍속 (20m/s) 이상이 예상될 때
+#
+
+wind_speed1 = int(input("육상 풍속(m/h) : "))
+wind_speed2 = int(input("순간풍속(m/s) : "))
+
+if(wind_speed1 >= 14 or wind_speed2 >= 20):
+    print("\n육상 풍속(m/h)이 %d이상 또는 순간풍속(m/s) %d이상 -> 강풍주의보 알림\n" %(wind_speed1, wind_speed2))
+else:
+    print("\n강풍주의보 알림 없음\n")
+
+#
+# 5-8 감자칩 가격과 구입 개수 입력받아 계산.
+# 단, 감자칩을 10개이상 구입하면 10% 할인
+#
+
+price = int(input("감자칩 가격 : "))
+cnt = int(input("구입 갯수 : "))
+
+if(cnt >= 10):
+    money = price * cnt * 0.9
+else:
+    money = price * cnt
+print("\n%d 원짜리 감자칩 %d개 구입 -> 총 금액은 %d원\n" %(price, cnt, money))
+
+#
+# 5-9 감자칩 가격과 구입 개수 입력받아 계산.
+# 단, 10개이상 구입하면 10% 할인, 20개 이상 구입하면 20% 할인
+#
+
+price = int(input("감자칩 가격 : "))
+cnt = int(input("구입 갯수 : "))
+
+if(cnt >= 20):
+    money = price * cnt * 0.8
+elif(cnt >= 10):
+    money = price * cnt * 0.9
+else:
+    money = price * cnt
+print("\n%d 원짜리 감자칩 %d개 구입 -> 총 금액은 %d원\n" %(price, cnt, money))
+
+#
+# 5-10 자격증 시험(엑셀, 액세스) 합격 여부 프로그램
+# 한 과목이라도 50점 미만이면 불합격 : 과락, 평균 : 60점 미만이면 불합격
+#
+
+excel = int(input("엑셀 점수 : "))
+access = int(input("엑세스 점수 : "))
+
+print("\n엑셀 점수 : %d점, 엑세스 점수 : %d점" %(excel, access))
+
+avg = (excel + access) / 2
+
+print("총점 : %d점, 평균 : %.2lf점" %(excel + access, avg))
+
+if(excel < 50 or access < 50):
+    print("결과 : 과락으로 불합격")
+elif(avg < 60):
+    print("결과 : 평균 미달로 불합격")
+else:
+    print("결과 : 합격")
