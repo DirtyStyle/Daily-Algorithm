@@ -6,4 +6,95 @@ short-circuit evaluation이란 AND 혹은 OR의 연산에 있어서 결과가 �
 AND 연산의 경우
   - false가 우선 나와버리면 AND 뒤에 나오는 연산은 생략이 된다.
 
-OR
+ex) if(a == 0 && b == 0) ~
+  - 이 경우 a == 0이 false라면 b가 어떤 값이던 생략이 된다.
+
+OR 연산의 경우
+  - true가 우선 나와버리면 OR 뒤에 나오는 연산은 생략이 된다.
+
+ex) if(a == 0 || b == 0) ~
+  - 이 경우 a == 0이 true라면 b가 어떤 값이던 생략이 된다.
+
+별거 아닌 것 같지만 이 차이로 문제를 풀 때 맞고 틀릴 수 있기 때문에 주의해주어야 한다.
+
+BOJ - 4949번 균형잡힌 세상 : https://www.acmicpc.net/problem/4949
+
+첫 번째 코드 (정답 코드)
+
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+// 맞은 코드
+
+int main() {
+	while (1) {
+		string str;
+		stack<char>s;
+		bool tf = 0;
+
+		getline(cin, str);
+		if (str == ".") break;
+
+		for (int i = 0; i < (int)str.size(); i++) {
+			char c = str[i];
+
+			if (c == '(' || c == '[') s.push(c);
+			else if (c == ')') {
+				if (!s.empty() && s.top() == '(')
+					s.pop();
+				else {
+					tf = 1; break;
+				}
+			}
+			else if (c == ']') {
+				if (!s.empty() && s.top() == '[')
+					s.pop();
+				else {
+					tf = 1; break;
+				}
+			}
+		}
+		if (s.empty() && tf == 0) cout << "yes" << "\n";
+		else cout << "no" << "\n";
+	}
+	return 0;
+}
+
+두 번째 코드 (오답 코드)
+
+int main() {
+	while (1) {
+		string str;
+		stack<char>s;
+		bool tf = 0;
+
+		getline(cin, str);
+		if (str == ".") break;
+
+		for (int i = 0; i < (int)str.size(); i++) {
+			char c = str[i];
+
+			if (c == '(' || c == '[') s.push(c);
+			else if (c == ')') {
+				if (s.top() == '(' && !s.empty()) // 문제의 부분
+					s.pop();                        // 이 if문의 경우 stack의 top이 (이면 top이 비어있던 말던 수행해버린다
+				else {
+					tf = 1; break;
+				}
+			}
+			else if (c == ']') {
+				if (s.top() == '[' && !s.empty()) // 문제의 부분
+					s.pop();
+				else {
+					tf = 1; break;
+				}
+			}
+		}
+		if (s.empty() && tf == 0) cout << "yes" << "\n";
+		else cout << "no" << "\n";
+	}
+	return 0;
+}
