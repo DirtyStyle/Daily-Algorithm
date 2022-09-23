@@ -1,0 +1,9 @@
+short-circuit evaluation이란?
+
+short-circuit evaluation이란 AND 혹은 OR의 연산에 있어서 결과가 확실하게 예측이 되었을 때
+뒤에 나머지 연산을 실행하지 않고 답을 내버리는 경우를 의미한다.
+
+AND 연산의 경우
+  - false가 우선 나와버리면 AND 뒤에 나오는 연산은 생략이 된다.
+
+OR
