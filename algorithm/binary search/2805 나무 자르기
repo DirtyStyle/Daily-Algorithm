@@ -1,0 +1,48 @@
+2022 09 24
+
+2805번 나무 자르기 : https://www.acmicpc.net/problem/2805
+
+이진 탐색 공부하기 좋은 문제
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n, m, h = 0;
+	vector<int>v;
+
+	cin >> n >> m;
+
+	for (int i = 0; i < n; i++) {
+		int a; cin >> a; v.push_back(a);
+	}
+	
+	int start = 0;
+	int end = *max_element(v.begin(), v.end());
+
+	while (start <= end) {
+		long long tot = 0;
+		int mid = (start + end) / 2;
+		
+		for (auto i = 0; i < n; i++) {
+			if (v[i] > mid) tot += v[i] - mid;
+		}
+		if (tot < m) {
+			end = mid - 1;
+		}
+		else {
+			h = mid;
+			start = mid + 1;
+		}
+	}
+	cout << h;
+
+	return 0;
+}
