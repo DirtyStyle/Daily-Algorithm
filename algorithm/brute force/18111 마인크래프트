@@ -1,0 +1,58 @@
+2022 09 25
+
+18111번 마인크래프트 : https://www.acmicpc.net/problem/18111
+
+#include <iostream>
+
+using namespace std;
+
+int area[501][501];
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n, m, b;
+	bool flag = 0;
+
+	cin >> n >> m >> b;
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cin >> area[i][j];
+		}
+	}
+	int mint = 80000000, time = 0, height = 0, temp = 0;;
+
+	for (int k = 0; k < 257; k++) {
+		int crash = 0;
+		int add = 0;
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				temp = area[i][j] - k;
+
+				if (temp > 0) 
+					crash += temp;
+				else if (temp < 0) 
+					add -= temp;
+			}
+		}
+		if (crash + b >= add) {
+			time = crash * 2 + add;
+			if (time <= mint) {
+				mint = time;
+				height = k;
+				flag = 1;
+			}
+		}
+	}
+	if (!flag) {
+		mint = 0;
+		height = 0;
+	}
+	cout << mint << " " << height;
+
+	return 0;
+}
