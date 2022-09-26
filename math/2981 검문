@@ -1,0 +1,52 @@
+2022 09 26
+
+2981번 검문 : https://www.acmicpc.net/problem/2981
+
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int get_gcd(int a, int b) {
+	int c = 0;
+	while (b != 0) {
+		c = a % b;
+		a = b;
+		b = c;
+	}
+	return a;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n, cnt = 0;
+	int ry[101] = { 0 };
+	int arr[10000] = { 0 };
+
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		cin >> ry[i];
+	}
+	sort(ry, ry + n);
+
+	int m = ry[1] - ry[0];
+
+	for (int i = 2; i < n; i++) {
+		m = get_gcd(m, ry[i] - ry[i - 1]);
+	}
+	for (int i = 1; i * i <= m; i++) {
+		if (m % i == 0) {
+			arr[cnt++] = i;
+			if (i != m / i)arr[cnt++] = m / i;
+		}
+	}
+	sort(arr, arr + cnt);
+	for (int i = 0; i < cnt; i++) {
+		if (arr[i] != 1) cout << arr[i] << " ";
+	}
+	return 0;
+}
