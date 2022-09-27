@@ -1,0 +1,45 @@
+2022 09 27
+
+1654번 랜선 자르기 : https://www.acmicpc.net/problem/1654
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	unsigned int k, n, ans = 0;
+	vector<int>v;
+
+	cin >> k >> n;
+
+	for (int i = 0; i < k; i++) {
+		unsigned int a; cin >> a; v.push_back(a);
+	}
+	unsigned int start = 1;
+	unsigned int end = *max_element(v.begin(), v.end());
+
+	while (start <= end) {
+		long long tot = 0;
+		unsigned int mid = (start + end) / 2;
+
+		for (auto i = 0; i < k; i++)
+			tot += v[i] / mid;
+      
+		if (tot >= n) {
+			ans = max(ans, mid);
+
+			start = mid + 1;
+		}
+		else 
+			end = mid - 1;
+	}
+	cout << ans << "\n";
+
+	return 0;
+}
