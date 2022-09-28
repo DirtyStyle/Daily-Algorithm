@@ -1,0 +1,334 @@
+for문
+
+# 6-1 사용자가 입력한 값까지의 홀수 합계 구하기
+'''
+i, hap = 0, 0
+num = 0
+
+num = int(input("값 : "))
+
+for i in range(1, num + 1, 2) :
+    hap += i
+	 
+print("1 ~ %d 홀수 합계 : %d" % (num, hap))
+'''
+
+# 6-2 사용자가 입력한 값까지의 홀수 합계와 갯수 구하기
+'''
+i, hap = 0, 0
+num = 0
+cnt = 0
+
+num = int(input("값 : "))
+
+for i in range(1, num + 1, 2) :
+    hap += i
+    cnt += 1
+	 
+print("1 ~ %d 홀수 합계 : %d, 갯수 : %d" % (num, hap, cnt))
+'''
+
+# 6-3 시작값과 종료값을 입력받아 홀수 합계와 갯수 구하기
+'''
+i, hap = 0, 0
+num1, num2 = 0, 0
+cnt = 0
+
+num1 = int(input("시작값 : "))
+num2 = int(input("종료값 : "))
+
+if num1 % 2 == 0:
+    num1 += 1
+
+for i in range (num1, num2 + 1, 2) :
+    hap += i
+    cnt += 1
+
+print("%d ~ %d 홀수 합계 : %d, 갯수 : %d" % (num1, num2, hap, cnt))
+'''
+
+# 6-4 시작값과 종료값을 입력받아 그 사이의 홀수 출력 
+'''
+i = 0
+num1, num2 = 0, 0
+
+num1 = int(input("시작값 : "))
+num2 = int(input("종료값 : "))
+
+if num1 % 2 == 0:
+    num1 += 1
+
+for i in range (num1, num2 + 1, 2):
+    print("%d " %(i), end=' ')
+'''
+
+# 6-5 시작값과 종료값을 입력받아 그 사이의 홀수 갯수와 *로 출력
+'''
+i = 0
+num1, num2 = 0, 0
+cnt = 0
+
+num1 = int(input("시작값 : "))
+num2 = int(input("종료값 : "))
+
+if num1 % 2 == 0:
+    num1 += 1
+
+for i in range (num1, num2 + 1, 2):
+    cnt += 1
+ 
+print("%d ~ %d 홀수 갯수 : %d" % (num1, num2, cnt))
+
+for i in range (1, cnt + 1, 1):
+    print("*", end=' ')
+'''
+
+# 6-6 3명의 나이를 입력받아 평균 나이 출력
+'''
+i = 0
+age, tot, avg = 0, 0, 0.0
+
+for i in range(1, 4, 1) :
+    age = int(input("나이 : "))
+    tot += age
+avg = tot/3
+print("3명의 평균 나이 %3.1f " %(avg), end=' ')
+'''
+
+# 6-7 사람수와 나이를 입력받아 평균 나이 출력
+'''
+i = 0
+num = 0
+age, tot, avg = 0, 0, 0.0
+
+num= int(input("사람수  : "))
+
+for i in range (1, num + 1, 1):
+    age = int(input("나이 : "))
+    tot += age
+avg = tot / num
+
+print("%d명의 평균 나이 %3.1f " %(num, avg), end=' ')
+'''
+
+# 6-8 사람수와 나이를 입력받아 평균 나이와 최고령 출력
+'''
+i = 0
+num = 0
+age, tot, avg = 0, 0, 0.0
+max = 0
+
+num= int(input("사람수  : "))
+
+for i in range (1, num + 1, 1):
+    age = int(input("나이 : "))
+    if max < age :
+        max = age
+    tot += age
+avg = tot / num
+
+print("%d명의 평균 나이 %3.1f, 최고령 %d " %(num, avg, max), end=' ')
+'''
+
+# 6-9 사람수와 나이(1~99)를 입력받아 평균 나이와 최고령, 최연소 출력
+'''
+i, num = 0, 0
+age, tot, avg = 0, 0, 0.0
+max, min = 0,100
+
+num= int(input("사람수  : "))
+
+for i in range (1, num + 1, 1):
+    age = int(input("나이 : "))
+    if max < age :
+        max = age
+    if min > age :
+        min = age
+    tot += age
+avg = tot / num
+
+print("%d명의 평균 나이 %3.1f, 최고령 %d, 최연소 %d " %(num, avg, max, min), end=' ')
+
+
+while문
+
+# 6-10 사용자가 입력한 값까지의 홀수 합계 구하기
+'''
+i, hap = 0, 0
+num = 0
+
+num = int(input("값 : "))
+
+i = 1
+while i < num + 1:
+    hap += i
+    i += 2
+
+print("1 ~ %d 홀수 합계 : %d" % (num, hap))
+'''
+
+# 6-11 사용자가 입력한 값까지의 홀수 합계와 갯수 구하기
+'''
+i, hap = 0, 0
+num = 0
+cnt = 0
+
+num = int(input("값 : "))
+
+i = 1
+while i < num + 1:
+    hap += i
+    i += 2
+    cnt += 1
+
+print("1 ~ %d 홀수 합계 : %d, 갯수 : %d" % (num, hap, cnt))
+'''
+
+# 6-12  시작값과 종료값을 입력받아 홀수 합계와 갯수 구하기
+'''
+i, hap = 0, 0
+num1, num2 = 0, 0
+cnt = 0
+
+num1 = int(input("시작값 : "))
+num2 = int(input("종료값 : "))
+
+if num1 % 2 == 0:
+    num1 += 1
+
+i = num1
+while i < num2 + 1:
+    hap += i
+    i += 2
+    cnt += 1
+    
+print("%d ~ %d 홀수 합계 : %d, 갯수 : %d" % (num1, num2, hap, cnt))
+'''
+
+# 6-13 시작값과 종료값을 입력받아 그 사이의 홀수 출력 
+'''
+i = 0
+num1, num2 = 0, 0
+
+num1 = int(input("시작값 : "))
+num2 = int(input("종료값 : "))
+
+if num1 % 2 == 0 :
+    num1 += 1
+
+i = num1
+while i < num2 + 1:
+    print("%d" %(i), end='  ')
+    i += 2
+'''    
+
+# 6-14 시작값과 종료값을 입력받아 그 사이의 홀수 갯수와 *로 출력
+'''
+i = 0
+num1, num2 = 0, 0
+cnt = 0
+
+num1 = int(input("시작값 : "))
+num2 = int(input("종료값 : "))
+
+if num1 % 2 == 0:
+    num1 += 1
+
+i = num1
+while i < num2 + 1:
+    cnt += 1
+    i += 2
+    
+print("%d ~ %d 홀수 갯수 : %d" % (num1, num2, cnt))
+i = 0
+while i < cnt + 1:
+    print("*", end=' ')
+    i += 1
+'''
+
+# 6-15 3명의 나이를 입력받아 평균 나이 출력
+'''
+i = 0
+age, tot, avg = 0, 0, 0.0
+
+while i < 3:
+    age = int(input("나이 : "))
+    tot += age
+    i += 1
+
+avg = tot/3
+
+print("3명의 평균 나이 %3.1f " %(avg), end=' ')
+'''
+
+# 6-16 사람수와 나이를 입력받아 평균 나이 출력
+'''
+i, num = 0, 0
+age, tot, avg = 0, 0, 0.0
+
+num= int(input("사람수  : "))
+
+while i < num:
+    age = int(input("나이 : "))
+    tot += age
+    i += 1
+
+avg = tot / num
+
+print("%d명의 평균 나이 %3.1f " %(num, avg), end=' ')
+'''
+
+# 6-17 사람수와 나이를 입력받아 평균 나이와 최고령 출력
+'''
+i, num = 0, 0
+age, tot, avg = 0, 0, 0.0
+max = 0
+
+num= int(input("사람수  : "))
+
+while i < num:
+    age = int(input("나이 : "))
+    tot += age
+    i += 1
+    if max < age :
+        max = age
+
+avg = tot / num
+
+print("%d명의 평균 나이 %3.1f, 최고령 %d " %(num, avg, max), end=' ')
+'''
+
+# 6-18 사람수와 나이(1~99)를 입력받아 평균 나이와 최고령, 최연소 출력
+'''
+i, num = 0, 0
+age, tot, avg = 0, 0, 0.0
+max, min = 0,100
+
+num= int(input("사람수  : "))
+
+while i < num:
+    age = int(input("나이(1~99) : "))
+    tot += age
+    i += 1
+    if max < age :
+        max = age
+    if min > age :
+        min = age
+
+avg = tot / num
+
+print("%d명의 평균 나이 %3.1f, 최고령 %d, 최연소 %d " %(num, avg, max, min), end=' ')
+'''
+
+# 6-19 0을 입력할 때까지 반복 입력받아 출력 
+'''
+num = 0
+
+while True :
+    num= int(input("정수(0:입력 종료) : "))
+    if num == 0:
+        break
+    print("입력한 수 : %d" %(num))
+'''
+
+
