@@ -1,0 +1,38 @@
+2022 09 30
+
+2156번 포도주 시식 : https://www.acmicpc.net/problem/2156
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n, max_dp = 0;
+
+	cin >> n;
+
+	vector<int>dp(n + 1); vector<int>grp(n + 1);
+	grp[0] = 0; dp[0] = grp[0];
+
+	for (int i = 1; i <= n; i++) {
+		cin >> grp[i];
+	}
+	
+	dp[1] = grp[1];
+	dp[2] = dp[1] + grp[2];
+	max_dp = max(dp[1], dp[2]);
+
+	for (int i = 3; i <= n; i++) {
+		dp[i] = max(dp[i - 3] + grp[i - 1] + grp[i], max(dp[i - 2] + grp[i], dp[i - 1]));
+		max_dp = max(max_dp, dp[i]);
+	}
+	cout << max_dp;
+
+	return 0;
+}
