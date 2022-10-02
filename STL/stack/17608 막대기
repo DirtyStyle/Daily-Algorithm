@@ -1,0 +1,33 @@
+2022 10 02
+
+17608번 막대기 : https://www.acmicpc.net/problem/17608
+
+처음엔 하나하나 다 넣어서 비교해 볼 생각을 했는데
+생각해 보니 가장 큰 것이 들어왔을 때 그 이후로 들어오는 것들 중 겹치지 않는 것만 넣으면 됐다
+
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+int main() {
+	int n, max = 0, cnt = 0;
+	stack<int>s;
+
+	cin >> n;
+	
+	for (int i = 0; i < n; i++) {
+		int a; cin >> a; s.push(a);
+	}
+	int ssize = s.size();
+	for (int i = 0; i < ssize; i++) {
+		if (max < s.top()) {
+			max = s.top();
+			cnt++;
+		}
+		s.pop();
+	}
+	cout << cnt;
+
+	return 0;
+}
