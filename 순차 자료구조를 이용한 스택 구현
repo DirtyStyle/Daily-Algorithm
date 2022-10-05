@@ -20,9 +20,8 @@ int main() {
 	while (1) {
 		printf("\n\n top : %d", top);
 		printf("\n\n Stack [ ");
-		for (i = 0; i < 5; i++) {
-			if (S[i] == 0) break;
-			else printf(" %d ", S[i]);
+		for (i = 0; i <= top; i++) {
+			printf(" %d ", S[i]);
 		}
 		printf(" ]\n\n");
 
@@ -31,6 +30,7 @@ int main() {
 		printf("\n\n 2. 삭제 pop()");
 		printf("\n\n 0. 종료");
 		printf("\n\n .......[ ]\b\b");
+		
 		scanf_s("%d", &sel);
 		if (sel == 0) break;
 		else if (sel == 1) push(S);
