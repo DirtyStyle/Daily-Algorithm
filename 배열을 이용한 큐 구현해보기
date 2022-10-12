@@ -1,0 +1,62 @@
+2022 10 12
+
+자료구조와 알고리즘 실습 수업
+
+선형 큐
+
+#include <stdio.h>
+
+void QueueView(int Q[], int front, int rear) {
+	if (front == rear) 
+		printf("\n\n Queue is Empty\tfront = %d, rear = %d\n\n", front, rear);
+	else {
+		printf("\n\n\t\t Queue [ ");
+		for (int i = front + 1; i <= rear; i++) {
+			printf("%2d", Q[i]);
+		}
+		printf(" ] \tfront = %d, rear = %d\n\n", front, rear);
+	}
+}
+void enQueue(int Q[], int* rear) {
+	int data;
+	if (*rear == 4) printf("\n\n Queue is Full\n\n");
+	else {
+		printf("\n\n\t\tenQueue Data : \n\n");
+		scanf_s("%d", &data);
+		Q[++(*rear)] = data;
+	}
+}
+
+void deQueue(int Q[], int* front, int* rear) {
+	if (*rear == *front) printf("\n\n\t\tQueue is Empty\n\n");
+	else {
+		printf("\n\n\t\tdeQueue : %d\n\n", Q[*rear]);
+		Q[++(*front)] = 0;
+	}
+}
+
+int main() {
+	int Q[5] = { 0 }, front = -1, rear = -1;
+	int sel;
+
+	while (1)
+	{
+		QueueView(Q, front, rear);
+		printf("\n\n\t\t[Queue]\n\n");
+		printf("\t\t 1. enQueue\n\n");
+		printf("\t\t 2. deQueue\n\n");
+		printf("\t\t 0. Exit\n\n");
+		printf("\t\t      ..... [ ]\b\b");
+		scanf_s("%d", &sel);
+		if (sel == 1) enQueue(Q, &rear);
+		else if (sel == 2) deQueue(Q, &front, &rear);
+		else if (sel == 0) break;
+		else printf("\n\n\t\t메뉴를 잘못 선택하였습니다. \n\n");
+	}
+	printf("\n\n\t\tbye\n\n");
+
+	return 0;
+}
+
+원형 큐
+
