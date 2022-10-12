@@ -1,0 +1,68 @@
+2022 10 12
+
+1021번 회전하는 큐 : https://www.acmicpc.net/problem/1021
+
+#include <iostream>
+#include <deque>
+
+using namespace std;
+
+deque<int>d;
+int ans_cnt = 0;
+
+void front_pop() {
+	d.pop_front();
+}
+
+void front_to_back() {
+	d.push_back(d.front());
+	d.pop_front();
+}
+void back_to_front() {
+	d.push_front(d.back());
+	d.pop_back();
+}
+
+int main() {
+	int n, m, a;
+
+	cin >> n >> m;
+
+	for (int i = 1; i <= n; i++) {
+		d.push_back(i);
+	}
+
+	for (int i = 0; i < m; i++) {
+		cin >> a;
+
+		int front_cnt = 0, back_cnt = 0;
+
+		while (a != d.front()) {
+			front_cnt++;
+			front_to_back();
+		}
+		for (int i = 0; i < front_cnt; i++) back_to_front();		
+		while (a != d.front()) {
+			back_cnt++;
+			back_to_front();
+		}
+		for (int i = 0; i < back_cnt; i++) front_to_back();
+		if (front_cnt <= back_cnt) {
+			while (a != d.front()) {
+				ans_cnt++;
+				front_to_back();
+			}
+			front_pop();
+		}
+		else {
+			while (a != d.front()) {
+				ans_cnt++;
+				back_to_front();
+			}
+			front_pop();
+		}
+	}
+	cout << ans_cnt;
+	
+	return 0;
+}
