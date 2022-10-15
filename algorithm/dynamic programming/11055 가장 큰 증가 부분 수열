@@ -5,6 +5,7 @@
 dp는 풀면서도 잘 모르겠다... 공부를 어떻게 해야 하는건지..
 
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -22,8 +23,8 @@ int main() {
 			if (arr[i] > arr[j]) dp[i] = max(dp[i], dp[j] + arr[i]);
 		}
 	}
-	for (int i = 1; i <= n; i++) {
-		cout << dp[i] << "\n";
-	}
+	sort(dp, dp + n + 1);
+	cout << dp[n];
 
 	return 0;
+}
