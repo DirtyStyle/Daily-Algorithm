@@ -1,0 +1,40 @@
+2022 10 28
+
+9935번 문자열 폭발 : https://www.acmicpc.net/problem/9935
+
+#include <iostream>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+int main() {
+	string str, bomb, ans;
+
+	cin >> str >> bomb;
+	int strlen = str.length(), bomblen = bomb.length();
+	char bombtop = bomb[bomblen - 1];
+	
+	for (int i = 0; i < strlen; i++) 
+	{
+		ans.push_back(str[i]);
+
+		if (ans.back() == bombtop) 
+		{
+			int anslen = ans.length();
+			bool flag = 1;
+
+			for (int k = 1; k <= bomblen; k++) 
+			{
+				if (ans[anslen - k] != bomb[bomblen - k]) {
+					flag = 0; break;
+				}
+			}
+			if (flag) for (int k = 0; k < bomblen; k++) ans.pop_back();
+		}
+	}
+	if (ans.empty()) cout << "FRULA";
+	else cout << ans;
+
+	return 0;
+}
