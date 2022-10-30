@@ -1,0 +1,34 @@
+2022 10 30
+
+13305번 주유소 : https://www.acmicpc.net/problem/13305
+
+#include <iostream>
+
+using namespace std;
+
+long long gas[100000]; // 주유소 가격 5 2 4 1
+long long distance[100000]; // 거리 2 3 1
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	long long city, street = 0, money = 0, min = 1000000001;
+
+	cin >> city;
+	street = city - 1;
+
+	for (int i = 0; i < street; i++) cin >> ::distance[i];
+
+	for (int i = 0; i < city; i++) cin >> gas[i];
+
+	for (int i = 0; i < street; i++) {
+		if (min > gas[i]) min = gas[i];
+
+		money += (::distance[i] * min);
+	}
+	cout << money;
+
+	return 0;
+}
