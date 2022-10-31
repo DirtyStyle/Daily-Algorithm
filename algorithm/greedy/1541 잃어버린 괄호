@@ -1,0 +1,35 @@
+2022 10 31
+
+1541번 잃어버린 괄호 : https://www.acmicpc.net/problem/1541
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string s, oper, temp;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	cin >> s;
+
+	bool flag = 0;
+	int slen = s.length(), sum(0);
+
+	for (int i = 0; i <= slen; i++) {
+		if (s[i] == '+' || s[i] == '-' || i == slen) {
+			if (flag) sum -= stoi(temp);
+			else sum += stoi(temp);
+			temp = "";
+		}
+		else temp.push_back(s[i]);
+
+		if (s[i] == '-') flag = 1;
+	}
+	cout << sum;
+
+	return 0;
+}
