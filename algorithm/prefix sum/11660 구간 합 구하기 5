@@ -1,0 +1,44 @@
+2022 11 01
+
+11660번 구간 합 구하기 5 : https://www.acmicpc.net/problem/11660
+
+#include <iostream>
+
+using namespace std;
+
+int ps[1025][1025];
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n, m, input;
+
+	cin >> n >> m;
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			cin >> input;
+			if (i == 1 && j == 1) ps[i][j] = input;
+			else {
+				if (j == 1) ps[i][j] = ps[i - 1][n] + input;
+				else ps[i][j] = ps[i][j - 1] + input;
+			}
+		}
+	}
+
+	for (int i = 0; i < m; i++) {
+		int x1, y1, x2, y2, sum = 0;
+
+		cin >> x1 >> y1 >> x2 >> y2;
+		
+		for (int j = x1; j <= x2; j++) {
+			if (y1 == 1)
+				sum += ps[x1][y2] - ps[x1++ - 1][n];
+			else sum += ps[x1][y2] - ps[x1++][y1 - 1];
+		}
+		cout << sum << "\n";
+	}
+	return 0;
+}
