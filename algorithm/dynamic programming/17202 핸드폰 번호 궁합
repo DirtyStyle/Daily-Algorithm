@@ -1,0 +1,42 @@
+2022 11 02
+
+17202번 핸드폰 번호 궁합 : https://www.acmicpc.net/problem/17202
+
+#include <stdio.h>
+#include <math.h>
+
+int a[15][16];
+
+int main() {
+    int one[8] = { 0 }; int two[8] = { 0 }; int oone, ttwo, k = 0;
+    
+    scanf("%d %d", &oone, &ttwo);
+
+    for (int i = 7; i >= 0; i--) {
+        one[k] = (oone % (int)pow(10, i + 1)) / (int)pow(10, i);
+        two[k] = (ttwo % (int)pow(10, i + 1)) / (int)pow(10, i);
+        k++;
+    }
+    a[0][0] = one[0]; k = 1;
+
+    for (int i = 2; i < 16; i += 2) {
+        a[0][i] = one[k];
+        k++;
+    }
+    k = 0;
+    for (int i = 1; i < 16; i += 2) {
+        a[0][i] = two[k];
+        k++;
+    }
+    k = 16;
+
+    for (int i = 1; i < 15; i++) {
+        for (int j = 0; j < k - 1; j++) {
+            a[i][j] = (a[i - 1][j] + a[i - 1][j+1]) % 10;
+        }
+        k--; if (k == 2) break;
+    }
+    printf("%d%d", a[14][0], a[14][1]);
+
+    return 0;
+}
