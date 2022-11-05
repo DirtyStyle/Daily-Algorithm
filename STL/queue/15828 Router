@@ -1,0 +1,40 @@
+2022 11 05
+
+15828번 Router : https://www.acmicpc.net/problem/15828
+
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	queue<int>Router;
+	int Buffer,cntBuffer = 0, input;
+
+	cin >> Buffer;
+
+	while (1) {
+		cin >> input;
+		if (input == -1) break;
+		else if (input == 0) {
+			Router.pop();
+			cntBuffer--;
+		}
+		else if (cntBuffer < Buffer) {
+			Router.push(input);
+			cntBuffer++;
+		}
+	}
+	int Rlen = Router.size();
+	if (Rlen == 0) cout << "empty";
+	else
+		for (int i = 0; i < Rlen; i++) {
+			cout << Router.front() << " ";
+			Router.pop();
+		}
+	return 0;
+}
