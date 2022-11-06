@@ -1,0 +1,30 @@
+2022 11 06
+
+10974번 모든 순열 : https://www.acmicpc.net/problem/10974
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n;
+	vector<int>v;
+
+	cin >> n;
+
+	for (int i = 0; i < n; i++) v.push_back(i + 1);
+
+	do {
+		for (auto i = v.begin(); i != v.end(); i++)
+			cout << *i << " ";
+		cout << "\n";
+	} while (next_permutation(v.begin(), v.end()));
+
+	return 0;
+}
