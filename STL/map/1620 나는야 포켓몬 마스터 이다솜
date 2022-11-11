@@ -1,0 +1,41 @@
+2022 11 11
+
+1620번 나는야 포켓몬 마스터 이다솜 : https://www.acmicpc.net/problem/1620
+
+#include <iostream>
+#include <algorithm>
+#include <map>
+#include <string>
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	map<int, string>name;
+	map<string, int>key;
+	string idx;
+	int n, q;
+
+	cin >> n >> q;
+
+	for (int i = 1; i <= n; i++) {
+		cin >> idx;
+		name.insert({ i , idx });
+		key.insert({ idx, i });
+	}
+	for (int i = 0; i < q; i++) {
+		cin >> idx;
+		if (isdigit(idx[0]) != 0) {
+			auto it = name.find(stoi(idx));
+			cout << it->second << "\n";
+		}
+		else {
+			auto it = key.find(idx);
+			cout << it->second << "\n";
+		}
+	}
+	return 0;
+}
