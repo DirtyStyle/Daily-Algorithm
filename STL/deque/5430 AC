@@ -1,0 +1,67 @@
+2022 11 12
+
+5430번 AC : https://www.acmicpc.net/problem/5430
+
+문제 이름값 한다... AC......
+
+#include <iostream>
+#include <algorithm>
+#include <deque>
+#include <string>
+
+using namespace std;
+
+int main() {
+	int t;
+	cin >> t;
+
+	while (t-- > 0) {
+		deque<int>d;
+		string s, func, temp;
+		int n, slen(0), flen(0);
+		bool isError = false, isReverse = false;
+		
+		cin >> func >> n >> s;
+
+		slen = s.length(); flen = func.length();
+
+		for (int i = 0; i < slen; i++) {
+			if (isdigit(s[i])) {
+				temp.push_back(s[i]);
+			}
+			else if (s[i] == ',' || s[i] == ']') {
+				if (temp.empty()) break;
+				d.push_back(stoi(temp));
+				temp = "";
+			}
+		}
+		for (int i = 0; i < flen; i++) {
+			if (func[i] == 'R') {
+				if (isReverse) isReverse = false;
+				else isReverse = true;
+			}
+			else if (func[i] == 'D') {
+				if (d.empty()) {
+					cout << "error\n";
+					isError = true;
+					break;
+				}
+				if (isReverse) d.pop_back();
+				else d.pop_front();
+			}
+		}
+		if (!isError) {
+			int dlen = d.size();
+			cout << "[";
+			for (int i = 0; i < dlen; i++) {
+				if (!isReverse) cout << d.front();
+				else cout << d.back();
+				if (i < dlen - 1) cout << ",";
+				if (!isReverse) d.pop_front();
+				else d.pop_back();
+			}
+			cout << "]\n";
+		}
+	}
+	return 0;
+}
