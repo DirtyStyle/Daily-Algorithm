@@ -1,0 +1,349 @@
+수업시간중에 =를 누르면 마지막 수와 연산을 계속 호출하는 기능을 구현하려고 했었는데
+카페인(핑계)을 먹어서 그런지.... 도저히 생각이 안나서 집에 와서 간단히 구현해 보았다.
+
+
+.... 이런건 처음 만들어봐서 그런지 코드가 조잡하고 복잡하다.....
+역시 경험이 최고
+
+
+
+namespace 계산기프로그램
+{
+    public partial class Form1 : Form
+    {
+        bool DotFlag = false; // true = 점 찍힘, false = 점 안찍힘
+
+        bool ClearFlag = false; // true = 한 번 지우고 숫자 표시, false =  그냥 표시 
+
+        bool EqualFlag = false; // true = "=" 나옴, false = "=" 안나옴
+
+        double LastNum = 0; // = 전의 마지막 피연산자를 저장하기 위한 변수
+
+        double NumStorage = 0; // 숫자를 잠시 저장하기 위한 변수
+
+        String OperationStorage = ""; // 연산자를 잠시 저장하기 위한 변수
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            textBox1.AppendText("1");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            textBox1.AppendText("2");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            textBox1.AppendText("3");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            textBox1.AppendText("4");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            textBox1.AppendText("5");
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            textBox1.AppendText("6");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            textBox1.AppendText("7");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            textBox1.AppendText("8");
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            textBox1.AppendText("9");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            if (textBox1.Text != "")
+                textBox1.AppendText("0");
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            if (textBox1.Text != "")
+                textBox1.AppendText("000");
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            NumStorage = 0;
+            OperationStorage = "";
+            DotFlag = false;
+            EqualFlag = false;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (ClearFlag)
+            {
+                textBox1.Text = "";
+                ClearFlag = false;
+            }
+            if (!DotFlag)
+            {
+                if (textBox1.Text == "")
+                    textBox1.AppendText("0");
+                textBox1.AppendText(".");
+                DotFlag = true;
+            }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != "")
+            {
+                if (textBox1.Text.Substring(textBox1.TextLength - 1) == ".")
+                    DotFlag = false;
+                textBox1.Text = textBox1.Text.Remove(textBox1.TextLength - 1);
+                if (textBox1.Text == "0")
+                    textBox1.Text = "";
+            }
+        }
+
+        public void Operation()
+        {
+            if (!EqualFlag)
+            {
+                if (OperationStorage == "+")
+                    textBox1.Text = (NumStorage + double.Parse(textBox1.Text)).ToString(); // ToString() = 숫자 형태를 문자로 바꿔줌
+                    // 저장소 숫자와 현재 박스에 담긴 숫자를 double형으로 바꿔준 뒤에 + , - , * , / 연산 후 textbox1에 저장
+
+                else if (OperationStorage == "-")
+                    textBox1.Text = (NumStorage - double.Parse(textBox1.Text)).ToString();
+
+                else if (OperationStorage == "*")
+                    textBox1.Text = (NumStorage * double.Parse(textBox1.Text)).ToString();
+
+                else if (OperationStorage == "/")
+                    textBox1.Text = (NumStorage / double.Parse(textBox1.Text)).ToString();
+            }
+            else if (EqualFlag)
+            {
+                if (OperationStorage == "+")
+                    textBox1.Text = (NumStorage + LastNum).ToString();
+
+                else if (OperationStorage == "-")
+                    textBox1.Text = (NumStorage - LastNum).ToString();
+
+                else if (OperationStorage == "*")
+                    textBox1.Text = (NumStorage * LastNum).ToString();
+
+                else if (OperationStorage == "/")
+                    textBox1.Text = (NumStorage / LastNum).ToString();
+            }
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            // + 버튼
+
+            if (EqualFlag)
+            {
+                EqualFlag = false;
+                goto nst;
+            }
+
+            if (textBox1.Text == "") // 숫자가 없을 경우
+                goto Exit; // 아래 코드를 무시하고 Exit:;로 넘어감
+
+            if (OperationStorage != "") // 연산자가 저장되어 있을 경우
+                Operation(); // Operation 함수를 실행
+
+            nst:;
+
+            NumStorage = double.Parse(textBox1.Text); // 다음 연산을 위해 현재까지의 숫자를 저장
+            OperationStorage = "+"; // 다음 연산을 위해 + 연산자 저장
+
+            DotFlag = false; // 연산자 뒤에 올 피연산자를 위해 DotFlag를 false로 변경
+            ClearFlag = true; // 연산자 뒤에 올 피연산자를 위해 ClearFlag를 true로 변경
+
+        Exit:;
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            // - 버튼
+
+            if (EqualFlag)
+            {
+                EqualFlag = false;
+                goto nst;
+            }
+
+            if (textBox1.Text == "") 
+                goto Exit;
+
+            if (OperationStorage != "")
+                Operation();
+
+            nst:;
+
+            NumStorage = double.Parse(textBox1.Text);
+            OperationStorage = "-";
+
+            DotFlag = false;
+            ClearFlag = true;
+
+        Exit:;
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            // * 버튼
+
+            if (EqualFlag)
+            {
+                EqualFlag = false;
+                goto nst;
+            }
+
+            if (textBox1.Text == "")
+                goto Exit;
+
+            if (OperationStorage != "")
+                Operation();
+
+            nst:;
+
+            NumStorage = double.Parse(textBox1.Text);
+            OperationStorage = "*";
+
+            DotFlag = false;
+            ClearFlag = true;
+
+        Exit:;
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            // / 버튼
+
+            if (EqualFlag)
+            {
+                EqualFlag = false;
+                goto nst;
+            }
+
+            if (textBox1.Text == "")
+                goto Exit;
+
+            if (OperationStorage != "")
+                Operation();
+
+            nst:;
+
+            NumStorage = double.Parse(textBox1.Text);
+            OperationStorage = "/";
+
+            DotFlag = false;
+            ClearFlag = true;
+
+        Exit:;
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            // = 버튼
+
+            if (textBox1.Text == "")
+                goto Exit;
+
+            if (!EqualFlag)
+            {
+                LastNum = double.Parse(textBox1.Text);
+                EqualFlag = true;
+            }
+            if (OperationStorage != "")
+                Operation();
+
+            NumStorage = double.Parse(textBox1.Text);
+
+            DotFlag = false;
+            ClearFlag = true;
+
+        Exit:;
+        }
+    }
+}
