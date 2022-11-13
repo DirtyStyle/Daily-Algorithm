@@ -1,0 +1,41 @@
+2022 11 13
+
+14425번 문자열 집합 : https://www.acmicpc.net/problem/14425
+
+시간초과(실패)한 코드
+
+#include <iostream>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+struct voca {
+	string s;
+};
+
+int main() {
+	int n, m, cnt(0);
+	bool isTrue = false;
+	cin >> n >> m;
+	voca V1[10000], V2[10000];
+
+	for (int i = 0; i < n; i++) {
+		cin >> V1[i].s;
+	}
+	for (int i = 0; i < m; i++) {
+		cin >> V2[i].s;
+		for (int j = 0; j < n; j++) {
+			if (V1[j].s == V2[i].s) {
+				cnt++;
+				isTrue = true;
+				break;
+			}
+		}
+		if (!isTrue) V2[i].s = "";
+		isTrue = false;
+	}
+	cout << cnt;
+
+	return 0;
+}
