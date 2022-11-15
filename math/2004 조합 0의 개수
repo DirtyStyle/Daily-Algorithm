@@ -1,0 +1,30 @@
+2022 11 15
+
+2004번 조합 0의 개수 : https://www.acmicpc.net/problem/2004
+
+#include <iostream>
+
+using namespace std;
+
+long long Cnt(int n, int a) {
+	long long num(0);
+	for (long long i = a; n >= i; i *= a)
+		num += n / i;
+	return num;
+}
+
+int main() {
+	long long n, m;
+	long long two(0), five(0);
+
+	cin >> n >> m;
+
+	// nCr = n! / (n - r)! * r!
+
+	two = Cnt(n, 2) - Cnt(n - m, 2) - Cnt(m, 2);
+	five = Cnt(n, 5) - Cnt(n - m, 5) - Cnt(m, 5);
+
+	cout << (two < five ? two : five);
+
+	return 0;
+}
