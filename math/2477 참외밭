@@ -1,0 +1,30 @@
+2022 11 26
+
+2477번 참외밭 : https://www.acmicpc.net/problem/2477
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int k, direct;
+    int a[6];
+    vector<int>v;
+
+    cin >> k;
+
+    for (int i = 0; i < 6; i++) 
+        cin >> direct >> a[i];
+    
+    for (int i = 0; i < 5; i++) 
+        v.push_back(a[i] * a[i + 1]);
+    v.push_back(a[0] * a[5]);
+
+    int max = *max_element(v.begin(), v.end());
+    int min = v[(max_element(v.begin(), v.end()) - v.begin() + 3) % 6];
+    cout << k * (max - min) << "\n";
+
+    return 0;
+}
