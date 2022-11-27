@@ -1,0 +1,17 @@
+2022 11 27
+
+9655번 돌 게임 : https://www.acmicpc.net/problem/9655
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+
+	if (n % 2 == 1) cout << "SK";
+	else cout << "CY";
+
+	return 0;
+}
