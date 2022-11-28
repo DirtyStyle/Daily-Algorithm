@@ -1,0 +1,31 @@
+2022 11 28
+
+1003번 피보나치 함수 : https://www.acmicpc.net/problem/1003
+
+dp를 이용하면 일반적인 재귀함수보다 훨씬 빠르게 피보나치 수열을 구할 수 있다.
+
+#include <iostream>
+
+using namespace std;
+
+int dp[41] = { 0,1 };
+
+int fibo(int n) {
+    if (n == 0 || n == 1)
+        return dp[n];
+    else if (dp[n] == 0) 
+        dp[n] = fibo(n - 1) + fibo(n - 2);
+    return dp[n];
+}
+
+int main() {
+    int t, n;
+    cin >> t;
+    while (t--) {
+        cin >> n;
+        fibo(n);
+        if (n == 0) cout << "1 0\n";
+        else cout << dp[n - 1] << " " << dp[n] << "\n";
+    }
+	return 0;
+}
