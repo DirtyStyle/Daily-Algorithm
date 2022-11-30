@@ -1,0 +1,36 @@
+저번주에 빠져서 혼자 해본다..
+
+
+#4-1
+
+def calc_kmTom(km):
+    m = 1000 * km
+    print(km,"km를 m로 변환하면", m, "m")
+calc_kmTom(1)
+
+
+#4-2
+
+def calc_circle(r):
+    pi = 3.14
+    area = pi * r * r
+    cir = pi * 2 * r
+    print("반지름이", r, "인 원의 면적은 %f" %area,"둘레는 %f" %cir)
+
+calc_circle(5)
+
+
+#4-3
+
+def calc_rectangle(v1, v2):
+    area = v1 * v2
+    print("가로 %d," %v1, "세로 %d 인 사각형 넓이" %v2, area)
+calc_rectangle(10,20)
+
+
+#4-4
+
+def calc_seconds(h,m,s):
+    sum = h*60*60 + m*60 + s
+    print("%d시간, %d분, %d초 -> %d초" %(h, m, s, sum))
+calc_seconds(1,1,1)
