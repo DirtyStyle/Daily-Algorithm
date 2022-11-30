@@ -1,0 +1,42 @@
+2022 11 30
+
+24480번 알고리즘 수업 - 깊이 우선 탐색 2 : https://www.acmicpc.net/problem/24480
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int cnt = 0;
+int ans[100001];
+vector<int>graph[100001];
+bool visited[100001] = { false };
+
+void dfs(int x) {
+	if (visited[x]) return;
+	visited[x] = true;
+	ans[x - 1] = ++cnt;
+	for (int i = 0; i < graph[x].size(); i++)
+		dfs(graph[x][i]);
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n, m, r;
+	cin >> n >> m >> r;
+	for (int i = 0, u, v; i < m; i++) {
+		cin >> u >> v;
+		graph[u].push_back(v);
+		graph[v].push_back(u);
+	}
+	for (int i = 0; i <= n; i++) 
+		sort(graph[i].begin(), graph[i].end(), greater<>());
+	dfs(r);
+	for (int i = 0; i < n; i++) 
+		cout << ans[i] << "\n";
+	return 0;
+}
