@@ -1,0 +1,48 @@
+2022 12 04
+
+17413번 단어 뒤집기 2 : https://www.acmicpc.net/problem/17413
+
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+stack <char> st;
+string s;
+bool flag = false;
+
+void print() {
+	int nowsize = st.size();
+	for (int j = 0; j < nowsize; j++) {
+		cout << st.top();
+		st.pop();
+	}
+}
+
+int main() {
+	getline(cin, s);
+
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == '<') {
+			flag = true;
+			if (!st.empty()) print();
+			cout << "<";
+		}
+		else if (s[i] == '>') {
+			flag = false;
+			cout << ">";
+		}
+		else if (flag == true) cout << s[i];
+		else {
+			if (s[i] == ' ') {
+				print();
+				cout << " ";
+			}
+			else st.push(s[i]);
+		}
+	}
+	if (!st.empty()) print();
+
+	return 0;
+}
